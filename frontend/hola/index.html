@@ -35,13 +35,22 @@
       });
 
       function getPingFromWebService(){
-            const url = 'http://localhost:3000/ping'
+            const url = 'http://localhost:3000/pong'
             //Encadenar los datos de la url con la respuesta 
             fetch(url)
-            .then((response) => response.text())
-            .then((text) => {
-              document.getElementById("respuesta").value = text;
-
+            .then((response) => {
+              if (!response.ok) {
+                throw new Error(`Error ${response.status}: ${response.statusText}`); // lanza un error si la respuesta no es exitosa
+              }
+              return response.json();
+            })
+            .then((data) => {
+              console.log(data);
+              document.getElementById("respuesta").value = data.message;
+            })
+            .catch((error) => {
+              console.error('Error:', error); // muestra el error en la consola
+              document.getElementById("respuesta").value = "Por favor verifica la URL."; // muestra un mensaje de error al usuario
             });
           }
     </script>
