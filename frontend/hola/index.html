@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <!-- <link rel="icon" type="image/svg+xml" href="/vite.svg" /> -->
+     <link rel="stylesheet" href="src/style.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Vite App</title>
+  </head>
+  <body>
+    <div id="app">
+      <h1>PING AL WEB SERVICE</h1>
+      <div class="card">
+        mensaje: <div id="mensaje"></div>
+      </div>
+
+      <input type="text" id="respuesta" placeholder="respuesta" >
+
+      <button id="ping">ping</button>
+
+
+    </div>
+
+    <script>
+      // Esperar a que el DOM se cargue completamente
+      document.addEventListener("DOMContentLoaded", function() {
+          // Seleccionar el botón por su ID
+          const boton = document.getElementById("ping");
+          
+          // Agregar un evento de clic al botón
+          boton.addEventListener("click", function() {
+            getPingFromWebService()
+
+          });
+      });
+
+      function getPingFromWebService(){
+            const url = 'http://localhost:3000/ping'
+            //Encadenar los datos de la url con la respuesta 
+            fetch(url)
+            .then((response) => response.text())
+            .then((text) => {
+              document.getElementById("respuesta").value = text;
+
+            });
+          }
+    </script>
+    <!-- <script type="module" src="/src/main.js"></script> -->
+  
+  </body>
+</html>
