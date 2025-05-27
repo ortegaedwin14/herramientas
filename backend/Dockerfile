@@ -1,4 +1,5 @@
-FROM node:20.10.0-alpha3.18
+# Usa una versión LTS de Node.js con Alpine Linux
+FROM node:20-alpine3.18
 WORKDIR /app
 COPY package.json .
 RUN npm i
