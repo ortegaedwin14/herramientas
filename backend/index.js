@@ -98,7 +98,7 @@ app.get('/libros', (req, res) => {
   res.status(200).json(librosFiltrados);
 });
 
-app.get('/libros', (req, res) => {
+app.get('/libros1', (req, res) => {
   res.json(libros);
 });
 
