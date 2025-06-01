@@ -102,6 +102,6 @@ app.get('/libros', (req, res) => {
   res.json(libros);
 });
 
-app.listen(3000, () => {
-  console.log('Servidor corriendo en http://localhost:3000/');
+app.listen(3000, '0.0.0.0', () => {
+  console.log('Servidor corriendo en http://3.144.177.147:3000/');
 });
