@@ -1,17 +1,23 @@
-# Dockerfile dentro de dist/
+# Usa una imagen base oficial de Node
+FROM node:18
 
-FROM node:20
-
+# Crea y establece el directorio de trabajo dentro del contenedor
 WORKDIR /app
 
-# Copiar solo package.json y package-lock.json primero para instalar dependencias
+# Copia solo lo necesario
 COPY package*.json ./
 
-RUN npm install
+# Instala solo las dependencias necesarias para producción
+RUN npm install --only=production
 
-# Luego copiar el resto de los archivos (incluye index.js, etc.)
-COPY . .
+# Copia el código transpilado
+COPY dist/ ./dist
 
+# Copia variables de entorno si las necesitas
+COPY .env .env
+
+# Expone el puerto si lo necesitas (opcional)
 EXPOSE 3000
 
+# Comando de inicio
 CMD ["node", "dist/index.js"]
