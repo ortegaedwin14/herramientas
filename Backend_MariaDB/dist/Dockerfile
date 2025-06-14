@@ -1,18 +1,13 @@
-# Usa una imagen oficial de Node.js
-FROM node:20-alpine
+# Dockerfile dentro de dist/
 
-# Crea un directorio de trabajo
+FROM node:20
+
 WORKDIR /app
 
-# Copia solo los archivos necesarios
-COPY package*.json ./
+# Solo copiar archivos ya necesarios (no package.json, no node_modules)
+COPY . .
 
-# Instala solo dependencias de producción
-RUN npm install --only=production
+# Asegúrate que .env ya esté copiado a este mismo directorio
+EXPOSE 3000
 
-# Copia los archivos compilados y otros necesarios
-COPY dist ./dist
-COPY .env .env
-
-# Define el comando de inicio
-CMD ["node", "dist/index.js"]
+CMD ["node", "index.js"]
