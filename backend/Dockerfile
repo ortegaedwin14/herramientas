@@ -1,8 +1,0 @@
-# Usa una versión LTS de Node.js con Alpine Linux
-FROM node:20-alpine3.18
-WORKDIR /app
-COPY package.json .
-RUN npm i
-COPY index.js .
-EXPOSE 3000
-CMD [ "node", "index.js" ]
